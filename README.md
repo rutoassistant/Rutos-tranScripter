@@ -101,3 +101,20 @@ Developers :-
 - S for Sayu  
 
 \* All the things that is listed up there are on development and no papers published about it.
+
+---
+
+## Research & Documentation
+
+For research context and presentations:
+- [IEEE Paper (2023)](https://ieeexplore.ieee.org/document/10165200) — "Artificial Level Language: A Library of Computing Engine for Natural Languages"
+- [Nov 2020 Presentation](Document/presentation-all-nov-2020.md) — Original concept presentation
+- [Apr 2021 Presentation](Document/presentation-javs-working-apr-2021.md) — Implementation updates
+
+### Wiki Index
+
+This project is documented in the [[LLM Wiki]]:
+- [[JAVS-tranScripter]] — Transcompiler architecture, known bugs, how to run
+- [[Artificial Level Language (ALL) Paper]] — IEEE paper abstract + slideshare pre-presentation content
+
+---
