@@ -1,0 +1,16 @@
+Store 2 in $v1, the add 5 with $v1 .
+Print the string 'i am adding 2 with 5 and the result is ' and result.
+Add 5 and 4, then print the string '5 + 4 = ' and result.
+Subtract 4 from 2, and print the result.
+Multiply 3 and 5, then print the string '3 * 5 = ' and result.
+Divide 10 by 2, and print the string '10 / 2 = ' and result.
+Power 2 with 3, then print the string '2 ** 3 = ' and result.
+Modulo 10 with 3, then print the string '10 % 3 = ' and result.
+Increment 5, then print the string '5 + 1 = ' and result.
+Decrement 10, then print the string '10 - 1 = ' and result.
+Store 10 in $v2, the lt 5 with $v2, then print the string '5 < 10 = ' and result.
+Store 5 in $v3, the gt 3 with $v3, then print the string '5 > 3 = ' and result.
+Store 7 in $v4, the eq 7 with $v4, then print the string '7 == 7 = ' and result.
+Store 3 in $v5, the ne 4 with $v5, then print the string '3 != 4 = ' and result.
+Store 3 in $v6, the le 5 with $v6, then print the string '3 <= 5 = ' and result.
+Store 5 in $v7, the ge 3 with $v7, then print the string '5 >= 3 = ' and result.

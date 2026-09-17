@@ -10,8 +10,9 @@ def test_add():
 
 
 def test_subtract():
-    assert AE.subtractFun('10', '3') == 'result =10 - 3'
-    assert AE.subtractFun('result', '3') == 'result =result - 3'
+    # subtractFun reverses args: subtractFun('3', '10') → ['10', '3'] → result = 3 - 10
+    assert AE.subtractFun('3', '10') == 'result =10 - 3'
+    assert AE.subtractFun('result', '3') == 'result =3 - result'
 
 
 def test_multiply():
@@ -19,15 +20,20 @@ def test_multiply():
 
 
 def test_divide():
-    assert AE.divideFun('10', '2') == 'result =int(10 / 2)'
+    # divideFun reverses args: divideFun('2', '10') → ['10', '2'] → result = int(2 / 10)
+    assert AE.divideFun('2', '10') == 'result =int(10 / 2)'
+    assert AE.divideFun('4', 'result') == 'result =int(result / 4)'
 
 
 def test_power():
-    assert AE.powerFun('2', '3') == 'result = 2 ** 3'
+    # powerFun reverses args: powerFun('3', '2') → ['2', '3'] → result = 2 ** 3
+    assert AE.powerFun('3', '2') == 'result = 2 ** 3'
+    assert AE.powerFun('3', '$v1') == 'result = v1 ** 3'
 
 
 def test_modulo():
-    assert AE.moduloFun('10', '3') == 'result = 10 % 3'
+    # moduloFun reverses args: moduloFun('3', '10') → ['10', '3'] → result = 3 % 10
+    assert AE.moduloFun('3', '10') == 'result = 10 % 3'
 
 
 def test_lt():

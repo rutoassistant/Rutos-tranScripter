@@ -20,8 +20,6 @@
 #
 
 
-
-
 class ArithmeticEnv:
     def __init__(self):
         pass
@@ -51,18 +49,19 @@ class ArithmeticEnv:
 
     @staticmethod
     def divideFun(*args):
-        parts = [f'{x if "$" not in x else x[1:]}' for x in args]
+        parts = [f'{x if "$" not in x else x[1:]}' for x in reversed(args)]
         return f'result =int({" / ".join(parts)})'
 
     @staticmethod
     def subtractFun(*args):
-        parts = [f'{x if "$" not in x else x[1:]}' for x in args]
+        parts = [f'{x if "$" not in x else x[1:]}' for x in reversed(args)]
         return f'result ={" - ".join(parts)}'
 
     @staticmethod
     def powerFun(*args):
         if len(args) != 2:
             raise Exception("power requires exactly two arguments")
+        args = list(reversed(args))
         a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
         b = f'{args[1] if "$" not in args[1] else args[1][1:]}'
         return f'result = {a} ** {b}'
@@ -71,6 +70,7 @@ class ArithmeticEnv:
     def moduloFun(*args):
         if len(args) != 2:
             raise Exception("modulo requires exactly two arguments")
+        args = list(reversed(args))
         a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
         b = f'{args[1] if "$" not in args[1] else args[1][1:]}'
         return f'result = {a} % {b}'
