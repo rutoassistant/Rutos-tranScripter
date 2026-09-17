@@ -41,24 +41,101 @@ class ArithmeticEnv:
 
     @staticmethod
     def addFun(*args):
-        result = " ".join(
-            [*[f'{x if "$" not in x else x[1:]} +' for x in args]])
-        result = f'result =int({result[:-1]})'
-        return result
+        parts = [f'{x if "$" not in x else x[1:]}' for x in args]
+        return f'result =int({" + ".join(parts)})'
 
     @staticmethod
     def multiplyFun(*args):
-        result = " ".join(
-            ["result =", *[f'{x if "$" not in x else x[1:]} *' for x in args]])
-        result = result[:-1]
-        return result
+        parts = [f'{x if "$" not in x else x[1:]}' for x in args]
+        return f'result ={" * ".join(parts)}'
 
     @staticmethod
     def divideFun(*args):
-        result = " ".join(
-            [*[f'{x if "$" not in x else x[1:]} /' for x in reversed(args)]])
-        result = f'result =int({result[:-1]})'
-        return result
+        parts = [f'{x if "$" not in x else x[1:]}' for x in args]
+        return f'result =int({" / ".join(parts)})'
+
+    @staticmethod
+    def subtractFun(*args):
+        parts = [f'{x if "$" not in x else x[1:]}' for x in args]
+        return f'result ={" - ".join(parts)}'
+
+    @staticmethod
+    def powerFun(*args):
+        if len(args) != 2:
+            raise Exception("power requires exactly two arguments")
+        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
+        b = f'{args[1] if "$" not in args[1] else args[1][1:]}'
+        return f'result = {a} ** {b}'
+
+    @staticmethod
+    def moduloFun(*args):
+        if len(args) != 2:
+            raise Exception("modulo requires exactly two arguments")
+        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
+        b = f'{args[1] if "$" not in args[1] else args[1][1:]}'
+        return f'result = {a} % {b}'
+
+    @staticmethod
+    def ltFun(*args):
+        if len(args) != 2:
+            raise Exception("lt requires exactly two arguments")
+        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
+        b = f'{args[1] if "$" not in args[1] else args[1][1:]}'
+        return f'result = {a} < {b}'
+
+    @staticmethod
+    def gtFun(*args):
+        if len(args) != 2:
+            raise Exception("gt requires exactly two arguments")
+        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
+        b = f'{args[1] if "$" not in args[1] else args[1][1:]}'
+        return f'result = {a} > {b}'
+
+    @staticmethod
+    def eqFun(*args):
+        if len(args) != 2:
+            raise Exception("eq requires exactly two arguments")
+        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
+        b = f'{args[1] if "$" not in args[1] else args[1][1:]}'
+        return f'result = {a} == {b}'
+
+    @staticmethod
+    def neFun(*args):
+        if len(args) != 2:
+            raise Exception("ne requires exactly two arguments")
+        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
+        b = f'{args[1] if "$" not in args[1] else args[1][1:]}'
+        return f'result = {a} != {b}'
+
+    @staticmethod
+    def leFun(*args):
+        if len(args) != 2:
+            raise Exception("le requires exactly two arguments")
+        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
+        b = f'{args[1] if "$" not in args[1] else args[1][1:]}'
+        return f'result = {a} <= {b}'
+
+    @staticmethod
+    def geFun(*args):
+        if len(args) != 2:
+            raise Exception("ge requires exactly two arguments")
+        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
+        b = f'{args[1] if "$" not in args[1] else args[1][1:]}'
+        return f'result = {a} >= {b}'
+
+    @staticmethod
+    def incrementFun(*args):
+        if len(args) != 1:
+            raise Exception("increment requires exactly one argument")
+        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
+        return f'result = {a} + 1'
+
+    @staticmethod
+    def decrementFun(*args):
+        if len(args) != 1:
+            raise Exception("decrement requires exactly one argument")
+        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
+        return f'result = {a} - 1'
 
     @staticmethod
     def storeFun(*args):
@@ -121,13 +198,6 @@ class ArithmeticEnv:
         return None
 
     @staticmethod
-    def subtractFun(*args):
-        result = " ".join(
-            ["result =", *[f'{x if "$" not in x else x[1:]} -' for x in reversed(args)]])
-        result = result[:-1]
-        return result
-
-    @staticmethod
     def printFun(*args):
         list_to_print = []
         for value in reversed(args):
@@ -152,4 +222,6 @@ class ArithmeticEnv:
     '''
     env_Words_and_WordAsFunction = {"add": addFun.__func__, "and": andFun.__func__, ",": commaFun.__func__, "print": printFun.__func__,
                                     "multiply": multiplyFun.__func__, "store": storeFun.__func__, "to": toFun.__func__, "in": inFun.__func__, "divide": divideFun.__func__, "by": byFun.__func__,
-                                    "display": displayFun.__func__, "the": theFun.__func__, 'then': thenFun.__func__, 'with': withFun.__func__, "string": stringFun.__func__, "subtract": subtractFun.__func__,"from":fromFun.__func__}
+                                    "display": displayFun.__func__, "the": theFun.__func__, 'then': thenFun.__func__, 'with': withFun.__func__, "string": stringFun.__func__, "subtract": subtractFun.__func__,"from":fromFun.__func__,
+                                    "power": powerFun.__func__, "modulo": moduloFun.__func__, "lt": ltFun.__func__, "gt": gtFun.__func__, "eq": eqFun.__func__, "ne": neFun.__func__, "le": leFun.__func__, "ge": geFun.__func__,
+                                    "increment": incrementFun.__func__, "decrement": decrementFun.__func__}
