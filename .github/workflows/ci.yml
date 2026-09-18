@@ -35,3 +35,26 @@ jobs:
 
       - name: Run E2E Tests
         run: python test_e2e.py test_full.ai
+
+  alpine:
+    runs-on: ubuntu-latest
+    container: python:3.12-alpine
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          apk add --no-cache gcc musl-dev
+          pip install --upgrade pip
+          pip install nltk numpy
+
+      - name: Download NLTK data
+        run: |
+          python -c "import nltk; nltk.download('punkt_tab'); nltk.download('averaged_perceptron_tagger')"
+
+      - name: Run Unit Tests
+        run: python test_arithmetic_env.py
+
+      - name: Run E2E Tests
+        run: python test_e2e.py test_full.ai
