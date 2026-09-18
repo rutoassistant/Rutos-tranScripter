@@ -1,4 +1,4 @@
-# Ruto's transScripter
+# Ruto's tranScripter
 ## For more knowledge start with Artificial Level
 ---
 ## This is on development project  
@@ -29,7 +29,7 @@ conda env create -f environment.yml
 
 
 
-\* To test working of Ruto's transScripter their is a same file with the zip called "main.ai".
+\* To test working of Ruto's tranScripter their is a same file with the zip called "main.ai".
 
 \* On the shell run this command (For linux users use python3 instead of python)
 ```
@@ -87,7 +87,7 @@ It is not a language, it is set of rules that to flow to make a tranScripter or 
 \* File Extension is ".ai"
 ___
 ___
-# Ruto's transScripter
+# Ruto's tranScripter
 It is the software which is to support the natural language as the input to the computer.
 
 Which it is developed on the basic of the rule, that given by the Achu's Programming Language.
@@ -106,7 +106,7 @@ Developers :-
 
 ## Research & Documentation
 
-This project is completed based on **"Artificial Level Language: A Library of Computing Engine for Natural Languages"** (K S Sunil et al., IEEE ICC 2023, DOI: `10.1109/ICCC57789.2023.10165200`) and an extended implementation of [VishnuSuresh2000/Ruto's transScripter](https://github.com/VishnuSuresh2000/Ruto's transScripter).
+This project is completed based on **"Artificial Level Language: A Library of Computing Engine for Natural Languages"** (K S Sunil et al., IEEE ICC 2023, DOI: `10.1109/ICCC57789.2023.10165200`) and an extended implementation of [VishnuSuresh2000/Ruto's tranScripter](https://github.com/VishnuSuresh2000/Ruto's tranScripter).
 
 ### Core Principles
 
@@ -142,7 +142,7 @@ See [README_ENV.md](README_ENV.md) for detailed principles and future developmen
 ### Wiki Index
 
 This project is documented in the [[LLM Wiki]]:
-- [[Ruto's transScripter]] — Transcompiler architecture, known bugs, how to run
+- [[Ruto's tranScripter]] — Transcompiler architecture, known bugs, how to run
 - [[Artificial Level Language (ALL) Paper]] — IEEE paper abstract + slideshare pre-presentation content
 
 ---

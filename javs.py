@@ -83,9 +83,9 @@ def main(path, print_log=False, generate_Python_code=False):
 if __name__ == "__main__":
     arguments = sys.argv[1:]
     if len(arguments) == 0:
-        print('''Ruto's transScripter for Achu's Programming Langauge, a branch which Support Artificial language.
+        print('''Ruto's tranScripter for Achu's Programming Langauge, a branch which Support Artificial language.
 **** Research based project, Not For Production in line Product. ****
-Four more documention https://github.com/VishnuSuresh2000/Ruto's transScripter
+Four more documention https://github.com/VishnuSuresh2000/Ruto's tranScripter
 \n.ai file not found.\n
 Command  :- 
         javs [file_name.ai] -[flag]

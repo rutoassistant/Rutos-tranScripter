@@ -46,11 +46,11 @@ The robot learned from its own actions in a **blocks world** — not from extern
 - System can explain its own actions
 - Can request clarification when ambiguous
 
-## Application to Ruto's transScripter
+## Application to Ruto's tranScripter
 
-Ruto's transScripter applies these principles to programming language understanding:
+Ruto's tranScripter applies these principles to programming language understanding:
 
-| SHRDLU | Ruto's transScripter |
+| SHRDLU | Ruto's tranScripter |
 |--------|-------------------|
 | Blocks world | Programming environment |
 | Robot arm commands | Python code generation |
@@ -93,7 +93,7 @@ Based on SHRDLU's principles, future development should add:
 
 - [[Winograd SHRDLU]] — First demonstration of procedural representation in NLU
 - [[Artificial Level Language (ALL) Paper]] — IEEE paper proposing ALL framework
-- [[Ruto's transScripter]] — Current implementation status
+- [[Ruto's tranScripter]] — Current implementation status
 
 ## See Also
 
