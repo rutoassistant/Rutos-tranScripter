@@ -108,6 +108,19 @@ Developers :-
 
 This project is completed based on **"Artificial Level Language: A Library of Computing Engine for Natural Languages"** (K S Sunil et al., IEEE ICC 2023, DOI: `10.1109/ICCC57789.2023.10165200`) and an extended implementation of [VishnuSuresh2000/JAVS-tranScripter](https://github.com/VishnuSuresh2000/JAVS-tranScripter).
 
+### Core Principles
+
+Environment-based learning follows principles from [[Winograd SHRDLU]] (1971):
+
+| Principle | Implementation |
+|-----------|----------------|
+| **Procedural Representation** | Knowledge encoded as callable functions (ArithmeticEnv) |
+| **Self-Reinforcement Loop** | Parse → Execute → Update based on feedback |
+| **Micro-World Constraint** | Current focus: arithmetic operations |
+| **Natural Language Interface** | English commands translate to Python |
+
+See [README_ENV.md](README_ENV.md) for detailed principles and future development roadmap.
+
 ### Cited Works
 
 1. **Sunil, K. S., et al.** "Artificial Level Language: A Library of Computing Engine for Natural Languages." *IEEE ICC 2023*. DOI: [10.1109/ICCC57789.2023.10165200](https://ieeexplore.ieee.org/document/10165200). — The foundational ALL framework: a tranSMachine with tranScripter and transCompiler that converts natural-language sentences to Python statements.
