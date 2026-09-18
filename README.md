@@ -106,10 +106,24 @@ Developers :-
 
 ## Research & Documentation
 
-For research context and presentations:
-- [IEEE Paper (2023)](https://ieeexplore.ieee.org/document/10165200) — "Artificial Level Language: A Library of Computing Engine for Natural Languages"
-- [Nov 2020 Presentation](Document/presentation-all-nov-2020.md) — Original concept presentation
+This project is completed based on **"Artificial Level Language: A Library of Computing Engine for Natural Languages"** (K S Sunil et al., IEEE ICC 2023, DOI: `10.1109/ICCC57789.2023.10165200`) and an extended implementation of [VishnuSuresh2000/JAVS-tranScripter](https://github.com/VishnuSuresh2000/JAVS-tranScripter).
+
+### Cited Works
+
+1. **Sunil, K. S., et al.** "Artificial Level Language: A Library of Computing Engine for Natural Languages." *IEEE ICC 2023*. DOI: [10.1109/ICCC57789.2023.10165200](https://ieeexplore.ieee.org/document/10165200). — The foundational ALL framework: a tranSMachine with tranScripter and transCompiler that converts natural-language sentences to Python statements.
+
+2. **Thomas, J., Suresh, V., Anas, M., Sajeev, S., & Sunil, K.** "Programming with Natural Languages: A Survey." In *Computer Networks and Inventive Communication Technologies* (Springer, 2021), pp. 767–779. DOI: [10.1007/978-981-16-3728-5_57](https://link.springer.com/chapter/10.1007/978-981-16-3728-5_57). — The natural language survey motivating the ALL approach.
+
+### Presentations
+
+- [Nov 2020 Presentation](Document/presentation-all-nov-2020.md) — Original ALL concept
 - [Apr 2021 Presentation](Document/presentation-javs-working-apr-2021.md) — Implementation updates
+
+### Project Documentation
+
+- [CONTEXT.md](CONTEXT.md) — Project architecture, current state, and design decisions
+- [ADR.md](ADR.md) — Architecture Decision Records
+- [Document/README_RESEARCH.md](Document/README_RESEARCH.md) — Research context
 
 ### Wiki Index
 
