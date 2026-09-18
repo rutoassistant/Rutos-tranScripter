@@ -1,100 +1,59 @@
-# Project Context
+# JAVS-tranScripter
 
-## What This Is
+Research-based natural-language-to-Python transpiler. Accepts sentences in a controlled subset of English (`.ai` files) and compiles them into executable Python statements. Not production-grade — a research prototype.
 
-JAVS-tranScripter is a research-based natural-language-to-Python transpiler. It accepts sentences written in a controlled subset of English (`.ai` files) and compiles them into executable Python statements. The project is **not production-grade** — it is a research prototype.
+## Language
 
-## Core Architecture
+**ArithmeticEnv**:
+A pluggable Environment class that maps natural-language words to Python code generators. Currently the sole Environment. Contains 12 operations: add, subtract, multiply, divide, power, modulo, lt, gt, eq, ne, le, ge.
 
-```
-.ai file (natural language)
-    → javs.py (main entry point)
-        → JAVS_Util/tokenize.py (NLTK-based tokenizer + POS tagger)
-        → JAVS_Util/globalTape.py (sentence tape — builds ordered token stream)
-        → JAVS_Util/machine.py (Machine — walks the tape, dispatches to Environment functions)
-        → Env/arithmeticEnv.py (ArithmeticEnv — maps words to Python code generators)
-        → Generated Python code (executed or printed with -p)
-```
+_Avoid_: Environment class, language module
 
-### Key Design Points
+**Environment**:
+A class with `env_Words_and_WordAsFunction` dict mapping words → static methods that return Python code strings. Pluggable — multiple Environments can coexist.
 
-- **Environments are pluggable.** Each Environment is a class with `env_Words_and_WordAsFunction` dict mapping words → static methods that return Python code strings. Currently only `ArithmeticEnv` exists.
-- **The tape reverses operands.** `machine.py` iterates `reversed(sentenceTape)`, so functions like `subtractFun`, `divideFun`, `powerFun`, and `moduloFun` must internally reverse their args to produce correct operand order. `addFun` and `multiplyFun` are commutative and don't need reversal. Compare operations (`lt/gt/le/ge`) preserve natural order.
-- **Variables use `$` prefix.** `$v1` in `.ai` becomes `v1` in generated Python. String literals use `~` prefix (e.g. `~hello` → `"hello"`).
+_Avoid_: Context, domain, scope
 
-## Current State (as of 2026-09-18)
+**tranScripter**:
+The parsing component of the ALL framework. Tokenizes natural language, builds a sentence tape, and dispatches to Environment functions.
 
-### What Works
+_Avoid_: Parser, tokenizer, lexer
 
-- 12 arithmetic operations: add, subtract, multiply, divide, power, modulo, lt, gt, eq, ne, le, ge
-- Increment / decrement
-- Variable storage and retrieval
-- String literal printing
-- Multi-statement sentences with `then`, `and`, `,`
+**transCompiler**:
+The planned second component of the ALL framework. Would convert the tranScripter's output into a target language (Python, C, etc.).
 
-### What's Tested
+_Avoid_: Code generator, compiler
 
-- `test_arithmetic_env.py` — 16 unit tests, all passing
-- `test_e2e.py` — end-to-end runner, transpiles + executes `.ai` files
-- `test_full.ai` — 15-operation integration test, all outputs verified correct
-- CI runs on Alpine Linux via GitHub Actions (`.github/workflows/ci.yml`)
+**RightHandTree**:
+The internal data structure that represents parsed sentence structure. Used by the machine to walk the tape.
 
-### What's Broken / Known Issues
+_Avoid_: AST, parse tree, syntax tree
 
-- The transpiler is **not** a general-purpose NLP system. It works on a controlled grammar — sentences must follow specific patterns. Out-of-pattern sentences will fail or produce incorrect code.
-- No error recovery for malformed input beyond basic tokenization checks.
-- No Windows binary distribution (pure Python — runs from source).
+**Machine**:
+The execution engine that walks the reversed sentence tape and dispatches to Environment functions.
+
+_Avoid_: Interpreter, executor, VM
+
+**Variable**:
+A named storage location. Uses `$` prefix in `.ai` files (e.g. `$v1`), stripped in generated Python (`v1`).
+
+_Avoid_: Symbol, register, memory cell
+
+**String literal**:
+A quoted string in `.ai` files. Uses `~` prefix (e.g. `~hello`), converted to `"hello"` in Python.
+
+_Avoid_: Text literal, string constant
+
+## Rules
+
+- **Pluggable Environments**: Each Environment is a class with a dict mapping words → static methods. New domains require new Environment classes.
+- **Tape reversal**: `machine.py` iterates `reversed(sentenceTape)`, so non-commutative operations must internally reverse their args.
+- **`$` prefix**: Variables in `.ai` files use `$`. Generated Python strips it.
+- **`~` prefix**: String literals in `.ai` files use `~`. Generated Python converts to `"..."`.
+- **Controlled grammar**: Sentences must follow specific patterns. Out-of-pattern input fails or produces incorrect code.
 
 ## Research Foundations
 
-This project is built on two prior works:
-
-1. **"Artificial Level Language: A Library of Computing Engine for Natural Languages"** — K S Sunil et al., IEEE ICC 2023 (DOI: `10.1109/ICCC57789.2023.10165200`). Introduces the ALL framework: a tranSMachine with tranScripter and transCompiler components. This project is a direct implementation and extension of that paper's concepts.
-
-2. **"Programming with Natural Languages: A Survey"** — Thomas J, Suresh V, Anas M, Sajeev S, Sunil K. In *Computer Networks and Inventive Communication Technologies* (Springer, 2021), pp. 767–779. DOI: `10.1007/978-981-16-3728-5_57`. The natural language survey that motivates the approach.
-
-The project also extends the original [VishnuSuresh2000/JAVS-tranScripter](https://github.com/VishnuSuresh2000/JAVS-tranScripter) with:
-- Full arithmetic support (power, modulo, comparison operators, increment/decrement)
-- Fixed operand ordering in non-commutative operations
-- Comprehensive test suite
-- CI/CD pipeline
-
-## How to Run
-
-```bash
-# Install dependencies
-pip install nltk numpy
-
-# Download NLTK data
-python -c "import nltk; nltk.download('punkt_tab'); nltk.download('averaged_perceptron_tagger')"
-
-# Run a .ai file
-python javs.py main.ai
-
-# Generate Python code without executing
-python javs.py main.ai -p
-
-# Show transpilation log
-python javs.py main.ai -l
-
-# List registered Environment words
-python javs.py -envWords
-```
-
-## Tests
-
-```bash
-# Unit tests
-python test_arithmetic_env.py
-
-# End-to-end tests
-python test_e2e.py test_full.ai
-```
-
-## Documentation
-
-- `Document/README_RESEARCH.md` — Research context and presentations
-- `Document/presentation-all-nov-2020.md` — Original ALL concept presentation
-- `Document/presentation-javs-working-apr-2021.md` — Implementation update presentation
-- `ADR.md` — Architecture Decision Records
-- LLM Wiki: [[JAVS-tranScripter]], [[Artificial Level Language (ALL) Paper]]
+- **"Artificial Level Language: A Library of Computing Engine for Natural Languages"** — K S Sunil et al., IEEE ICC 2023. Introduces the ALL framework: a tranSMachine with tranScripter and transCompiler.
+- **"Programming with Natural Languages: A Survey"** — Thomas J, Suresh V, Anas M, Sajeev S, Sunil K. Springer, 2021. The natural language survey motivating the approach.
+- **"Procedures as a Representation for Data in a Computer Program for Understanding Natural Language"** — Terry Winograd, MIT AI Lab, 1971. Introduces procedural representation and self-reinforcement learning in the SHRDLU blocks world.

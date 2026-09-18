@@ -134,8 +134,9 @@ See [README_ENV.md](README_ENV.md) for detailed principles and future developmen
 
 ### Project Documentation
 
-- [CONTEXT.md](CONTEXT.md) — Project architecture, current state, and design decisions
-- [ADR.md](ADR.md) — Architecture Decision Records
+- `CONTEXT.md` — Domain model glossary (language, rules, research foundations)
+- `ADR.md` — Architecture Decision Records (index; full ADRs in `docs/adr/`)
+- `docs/adr/` — Individual ADR files (0001–0004)
 - [Document/README_RESEARCH.md](Document/README_RESEARCH.md) — Research context
 
 ### Wiki Index
