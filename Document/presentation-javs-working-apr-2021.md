@@ -1,4 +1,4 @@
-# JAVS-tranScripter Working Presentation
+# Ruto's transScripter Working Presentation
 
 **Source:** [Slideshare](https://www.slideshare.net/VishnuSuresh53/artificial-level-language-and-javstranscripter-working)  
 **Date:** April 30, 2021  
@@ -111,7 +111,7 @@ add $num1 and $num2. show the result.
 
 ## Slide 14: Follow Our Work Through GitHub
 
-https://github.com/VishnuSuresh2000/JAVS-tranScripter
+https://github.com/VishnuSuresh2000/Ruto's transScripter
 
 ---
 

@@ -1,4 +1,4 @@
-# JAVS-tranScripter
+# Ruto's transScripter
 
 Research-based natural-language-to-Python transpiler. Accepts sentences in a controlled subset of English (`.ai` files) and compiles them into executable Python statements. Not production-grade — a research prototype.
 

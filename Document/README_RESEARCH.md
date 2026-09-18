@@ -1,13 +1,13 @@
 # Artificial Level Language (ALL) - Research Documentation
 
-This directory contains research documentation for the JAVS-tranScripter project, including presentation archives and academic paper references.
+This directory contains research documentation for the Ruto's transScripter project, including presentation archives and academic paper references.
 
 ## Presentations
 
 | File | Date | Description |
 |------|------|-------------|
 | [presentation-all-nov-2020.md](presentation-all-nov-2020.md) | November 2020 | Original ALL concept presentation (9 slides) |
-| [presentation-javs-working-apr-2021.md](presentation-javs-working-apr-2021.md) | April 2021 | JAVS-tranScripter implementation status (15 slides) |
+| [presentation-javs-working-apr-2021.md](presentation-javs-working-apr-2021.md) | April 2021 | Ruto's transScripter implementation status (15 slides) |
 
 ## Academic Paper
 
@@ -53,7 +53,7 @@ Name derived from developers:
 
 ## Links
 
-- GitHub: https://github.com/VishnuSuresh2000/JAVS-tranScripter
+- GitHub: https://github.com/VishnuSuresh2000/Ruto's transScripter
 - Slideshare: https://www.slideshare.net/VishnuSuresh53/artificial-level-language
 - Slideshare (Working): https://www.slideshare.net/VishnuSuresh53/artificial-level-language-and-javstranscripter-working
 
@@ -62,5 +62,5 @@ Name derived from developers:
 ## Wiki Reference
 
 This research is indexed in the LLM Wiki:
-- [[JAVS-tranScripter]] — Full transcompiler analysis, architecture, known bugs
+- [[Ruto's transScripter]] — Full transcompiler analysis, architecture, known bugs
 - [[Artificial Level Language (ALL) Paper]] — IEEE paper + presentation transcripts

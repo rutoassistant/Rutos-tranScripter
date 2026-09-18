@@ -1,4 +1,4 @@
-"""Tests for ArithmeticEnv operations in JAVS-tranScripter."""
+"""Tests for ArithmeticEnv operations in Ruto's transScripter."""
 import sys, os
 sys.path.insert(0, os.path.dirname(__file__))
 from Env.arithmeticEnv import ArithmeticEnv as AE
