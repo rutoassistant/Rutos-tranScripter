@@ -1,227 +1,213 @@
-#
-# Created on Mon Jun 14 2021
-#
-# The MIT License (MIT)
-# Copyright (c) 2021 Vishnu Suresh
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy of this software
-# and associated documentation files (the "Software"), to deal in the Software without restriction,
-# including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
-# and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
-# subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all copies or substantial
-# portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED
-# TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
-# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-# TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-#
+"""Arithmetic environment: natural language → Python arithmetic expressions."""
+from __future__ import annotations
+
+from typing import Any, Callable
 
 
 class ArithmeticEnv:
-    def __init__(self):
-        pass
-    
-    '''
-    env_variables :- is a list of variables which act a variables with out '$' in the program
+    """Environment that maps natural language words to Python code generators."""
 
-    '''
-    env_Variables = ["result"]
-    name_of_Env="ArithmeticEnv"
-
-    '''
-    Word As Function :- In here each word is assigned to an python function, which returns an python code as a string.
-    In some sonorous some words have no functionalities in that case return "None"
-
-    '''
+    env_Variables: list[str] = ["result"]
+    name_of_Env: str = "ArithmeticEnv"
 
     @staticmethod
-    def addFun(*args):
-        parts = [f'{x if "$" not in x else x[1:]}' for x in args]
-        return f'result =int({" + ".join(parts)})'
+    def _strip_var(arg: str) -> str:
+        """Strip the leading '$' from a variable reference."""
+        return arg[1:] if "$" in arg else arg
 
     @staticmethod
-    def multiplyFun(*args):
-        parts = [f'{x if "$" not in x else x[1:]}' for x in args]
-        return f'result ={" * ".join(parts)}'
+    def addFun(*args: str) -> str:
+        parts = [ArithmeticEnv._strip_var(x) for x in args]
+        return f"result =int({' + '.join(parts)})"
 
     @staticmethod
-    def divideFun(*args):
-        parts = [f'{x if "$" not in x else x[1:]}' for x in reversed(args)]
-        return f'result =int({" / ".join(parts)})'
+    def multiplyFun(*args: str) -> str:
+        parts = [ArithmeticEnv._strip_var(x) for x in args]
+        return f"result ={' * '.join(parts)}"
 
     @staticmethod
-    def subtractFun(*args):
-        parts = [f'{x if "$" not in x else x[1:]}' for x in reversed(args)]
-        return f'result ={" - ".join(parts)}'
+    def divideFun(*args: str) -> str:
+        parts = [ArithmeticEnv._strip_var(x) for x in reversed(args)]
+        return f"result =int({' / '.join(parts)})"
 
     @staticmethod
-    def powerFun(*args):
+    def subtractFun(*args: str) -> str:
+        parts = [ArithmeticEnv._strip_var(x) for x in reversed(args)]
+        return f"result ={' - '.join(parts)}"
+
+    @staticmethod
+    def powerFun(*args: str) -> str:
         if len(args) != 2:
             raise Exception("power requires exactly two arguments")
-        args = list(reversed(args))
-        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
-        b = f'{args[1] if "$" not in args[1] else args[1][1:]}'
-        return f'result = {a} ** {b}'
+        a = ArithmeticEnv._strip_var(args[1])
+        b = ArithmeticEnv._strip_var(args[0])
+        return f"result = {a} ** {b}"
 
     @staticmethod
-    def moduloFun(*args):
+    def moduloFun(*args: str) -> str:
         if len(args) != 2:
             raise Exception("modulo requires exactly two arguments")
-        args = list(reversed(args))
-        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
-        b = f'{args[1] if "$" not in args[1] else args[1][1:]}'
-        return f'result = {a} % {b}'
+        a = ArithmeticEnv._strip_var(args[1])
+        b = ArithmeticEnv._strip_var(args[0])
+        return f"result = {a} % {b}"
 
     @staticmethod
-    def ltFun(*args):
+    def ltFun(*args: str) -> str:
         if len(args) != 2:
             raise Exception("lt requires exactly two arguments")
-        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
-        b = f'{args[1] if "$" not in args[1] else args[1][1:]}'
-        return f'result = {a} < {b}'
+        a = ArithmeticEnv._strip_var(args[0])
+        b = ArithmeticEnv._strip_var(args[1])
+        return f"result = {a} < {b}"
 
     @staticmethod
-    def gtFun(*args):
+    def gtFun(*args: str) -> str:
         if len(args) != 2:
             raise Exception("gt requires exactly two arguments")
-        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
-        b = f'{args[1] if "$" not in args[1] else args[1][1:]}'
-        return f'result = {a} > {b}'
+        a = ArithmeticEnv._strip_var(args[0])
+        b = ArithmeticEnv._strip_var(args[1])
+        return f"result = {a} > {b}"
 
     @staticmethod
-    def eqFun(*args):
+    def eqFun(*args: str) -> str:
         if len(args) != 2:
             raise Exception("eq requires exactly two arguments")
-        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
-        b = f'{args[1] if "$" not in args[1] else args[1][1:]}'
-        return f'result = {a} == {b}'
+        a = ArithmeticEnv._strip_var(args[0])
+        b = ArithmeticEnv._strip_var(args[1])
+        return f"result = {a} == {b}"
 
     @staticmethod
-    def neFun(*args):
+    def neFun(*args: str) -> str:
         if len(args) != 2:
             raise Exception("ne requires exactly two arguments")
-        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
-        b = f'{args[1] if "$" not in args[1] else args[1][1:]}'
-        return f'result = {a} != {b}'
+        a = ArithmeticEnv._strip_var(args[0])
+        b = ArithmeticEnv._strip_var(args[1])
+        return f"result = {a} != {b}"
 
     @staticmethod
-    def leFun(*args):
+    def leFun(*args: str) -> str:
         if len(args) != 2:
             raise Exception("le requires exactly two arguments")
-        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
-        b = f'{args[1] if "$" not in args[1] else args[1][1:]}'
-        return f'result = {a} <= {b}'
+        a = ArithmeticEnv._strip_var(args[0])
+        b = ArithmeticEnv._strip_var(args[1])
+        return f"result = {a} <= {b}"
 
     @staticmethod
-    def geFun(*args):
+    def geFun(*args: str) -> str:
         if len(args) != 2:
             raise Exception("ge requires exactly two arguments")
-        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
-        b = f'{args[1] if "$" not in args[1] else args[1][1:]}'
-        return f'result = {a} >= {b}'
+        a = ArithmeticEnv._strip_var(args[0])
+        b = ArithmeticEnv._strip_var(args[1])
+        return f"result = {a} >= {b}"
 
     @staticmethod
-    def incrementFun(*args):
+    def incrementFun(*args: str) -> str:
         if len(args) != 1:
             raise Exception("increment requires exactly one argument")
-        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
-        return f'result = {a} + 1'
+        a = ArithmeticEnv._strip_var(args[0])
+        return f"result = {a} + 1"
 
     @staticmethod
-    def decrementFun(*args):
+    def decrementFun(*args: str) -> str:
         if len(args) != 1:
             raise Exception("decrement requires exactly one argument")
-        a = f'{args[0] if "$" not in args[0] else args[0][1:]}'
-        return f'result = {a} - 1'
+        a = ArithmeticEnv._strip_var(args[0])
+        return f"result = {a} - 1"
 
     @staticmethod
-    def storeFun(*args):
-        list_to_print = []
+    def storeFun(*args: str) -> str:
+        list_to_print: list[str] = []
         for value in reversed(args):
             if "$" in value:
                 if "~" == value[1:2]:
-                    # print(f'{value[1:]}')
                     list_to_print.append(f'"{value[2:]}"')
                 else:
                     list_to_print.append(value[1:])
         if len(list_to_print) == 2:
-            # if str(args[1]).isnumeric():
-            # result = f'{args[0] if "$" not in args[0] else args[0][1:]}={args[1] if "$" not in args[1] else args[1][1:]}'
-            result = f'{list_to_print[1]}={list_to_print[0]}'
-            # else:
-            # raise Exception("Second argument must be integer")
-            return result
+            return f"{list_to_print[1]}={list_to_print[0]}"
         else:
             raise Exception("Only One variable and one Integer is support")
 
     @staticmethod
-    def theFun(*args):
+    def theFun(*args: str) -> None:
         return None
 
     @staticmethod
-    def withFun(*args):
+    def withFun(*args: str) -> None:
         return None
 
     @staticmethod
-    def thenFun(*args):
+    def thenFun(*args: str) -> None:
         return None
 
     @staticmethod
-    def toFun(*args):
+    def toFun(*args: str) -> None:
         return None
 
     @staticmethod
-    def inFun(*args):
+    def inFun(*args: str) -> None:
         return None
 
     @staticmethod
-    def andFun(*args):
+    def andFun(*args: str) -> None:
         return None
 
     @staticmethod
-    def commaFun(*args):
+    def commaFun(*args: str) -> None:
         return ArithmeticEnv.andFun(*args)
 
     @staticmethod
-    def byFun(*args):
+    def byFun(*args: str) -> None:
         return None
 
     @staticmethod
-    def stringFun(*args):
-        return None
-    
-    @staticmethod
-    def fromFun(*args):
+    def stringFun(*args: str) -> None:
         return None
 
     @staticmethod
-    def printFun(*args):
-        list_to_print = []
+    def fromFun(*args: str) -> None:
+        return None
+
+    @staticmethod
+    def printFun(*args: str) -> str:
+        list_to_print: list[str] = []
         for value in reversed(args):
             if "$" in value:
                 if "~" == value[1:2]:
-                    # print(f'{value[1:]}')
                     list_to_print.append(f'"{value[2:]}"')
                 else:
                     list_to_print.append(value[1:])
-        result = " ".join(
-            ["print(", *[f'{x},' for x in list_to_print], ")"])
-        return result
+        return " ".join(["print(", *[f"{x}," for x in list_to_print], ")"])
 
     @staticmethod
-    def displayFun(*args):
+    def displayFun(*args: str) -> str:
         return ArithmeticEnv.printFun(*args)
 
-    '''
-    env_Words_and_WordAsFunction :- is a key value paired Dictionary which each key corresponds to word that accepted by the ENV
-    and the value is the function that defined 
-
-    '''
-    env_Words_and_WordAsFunction = {"add": addFun.__func__, "and": andFun.__func__, ",": commaFun.__func__, "print": printFun.__func__,
-                                    "multiply": multiplyFun.__func__, "store": storeFun.__func__, "to": toFun.__func__, "in": inFun.__func__, "divide": divideFun.__func__, "by": byFun.__func__,
-                                    "display": displayFun.__func__, "the": theFun.__func__, 'then': thenFun.__func__, 'with': withFun.__func__, "string": stringFun.__func__, "subtract": subtractFun.__func__,"from":fromFun.__func__,
-                                    "power": powerFun.__func__, "modulo": moduloFun.__func__, "lt": ltFun.__func__, "gt": gtFun.__func__, "eq": eqFun.__func__, "ne": neFun.__func__, "le": leFun.__func__, "ge": geFun.__func__,
-                                    "increment": incrementFun.__func__, "decrement": decrementFun.__func__}
+    env_Words_and_WordAsFunction: dict[str, Callable[..., Any]] = {
+        "add": addFun,
+        "and": andFun,
+        ",": commaFun,
+        "print": printFun,
+        "multiply": multiplyFun,
+        "store": storeFun,
+        "to": toFun,
+        "in": inFun,
+        "divide": divideFun,
+        "by": byFun,
+        "display": displayFun,
+        "the": theFun,
+        "then": thenFun,
+        "with": withFun,
+        "string": stringFun,
+        "subtract": subtractFun,
+        "from": fromFun,
+        "power": powerFun,
+        "modulo": moduloFun,
+        "lt": ltFun,
+        "gt": gtFun,
+        "eq": eqFun,
+        "ne": neFun,
+        "le": leFun,
+        "ge": geFun,
+        "increment": incrementFun,
+        "decrement": decrementFun,
+    }
