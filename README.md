@@ -106,7 +106,7 @@ Developers :-
 
 ## Research & Documentation
 
-This project is completed based on **"Artificial Level Language: A Library of Computing Engine for Natural Languages"** (K S Sunil et al., IEEE ICC 2023, DOI: `10.1109/ICCC57789.2023.10165200`) and an extended implementation of [VishnuSuresh2000/Ruto's tranScripter](https://github.com/VishnuSuresh2000/Ruto's tranScripter).
+This project is completed based on **"Artificial Level Language: A Library of Computing Engine for Natural Languages"** (K S Sunil et al., IEEE ICC 2023, DOI: `10.1109/ICCC57789.2023.10165200`) and is maintained at [rutoassistant/Rutos-tranScripter](https://github.com/rutoassistant/Rutos-tranScripter).
 
 ### Core Principles
 
