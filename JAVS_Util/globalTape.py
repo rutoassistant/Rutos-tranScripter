@@ -23,7 +23,7 @@ class JAVGlobalTape:
     @staticmethod
     def make(
         tokenize_input: NDArray[np.str_],
-        env: _EnvBase,
+        env: type[_EnvBase] | _EnvBase,
         show_logs: bool = False,
     ) -> np.ndarray:
         string_initial_constant = "$~"

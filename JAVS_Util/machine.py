@@ -10,7 +10,7 @@ class Machine:
     """Translates a list of sentence tapes into executable Python code."""
 
     @staticmethod
-    def generatePythonCode(global_tape: np.ndarray, env: _EnvBase) -> list[str]:
+    def generatePythonCode(global_tape: np.ndarray, env: type[_EnvBase] | _EnvBase) -> list[str]:
         python_code: list[str] = []
         for sentence_tape in global_tape:
             variable_buffer: list[str] = []
