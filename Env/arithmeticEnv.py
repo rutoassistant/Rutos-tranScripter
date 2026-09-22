@@ -4,11 +4,14 @@ from __future__ import annotations
 from collections.abc import Callable
 from typing import Any
 
+import numpy as np
+from numpy.typing import NDArray
+
 
 class ArithmeticEnv:
     """Environment that maps natural language words to Python code generators."""
 
-    env_Variables: list[str] = ["result"]
+    env_Variables: NDArray[np.str_] = np.array(["result"])
     name_of_Env: str = "ArithmeticEnv"
 
     @staticmethod

@@ -25,7 +25,7 @@ class Tokenize:
 
     @staticmethod
     def checkAllWordsInEnv(
-        words_list: NDArray[np.str_], env_words: list[str]
+        words_list: NDArray[np.str_], env_words: NDArray[np.str_]
     ) -> None:
         string_variable_flag = False
         variable_flag = False
@@ -45,7 +45,7 @@ class Tokenize:
                 raise WordNotFound(Word=str(word))
 
     @staticmethod
-    def generateWordListFromEnv(env: object) -> list[str]:
-        env_vars: list[str] = list(env.env_Variables)  # type: ignore[attr-defined]
-        env_keys: list[str] = list(env.env_Words_and_WordAsFunction.keys())  # type: ignore[attr-defined]
-        return env_vars + env_keys
+    def generateWordListFromEnv(env: object) -> NDArray[np.str_]:
+        env_vars: NDArray[np.str_] = np.array(env.env_Variables)  # type: ignore[attr-defined]
+        env_keys: NDArray[np.str_] = np.array(list(env.env_Words_and_WordAsFunction.keys()))  # type: ignore[attr-defined]
+        return np.concatenate([env_vars, env_keys])

@@ -1,6 +1,9 @@
 """Right-hand binary tree for parsing natural language expressions."""
 from __future__ import annotations
 
+import numpy as np
+from numpy.typing import NDArray
+
 
 class RightHandTree:
     """Binary tree node used to build a tape from tokenized input.
@@ -37,7 +40,7 @@ class RightHandTree:
         if self.right:
             self.right.PrintTree(node_position="right", height=height + 1)
 
-    def makeTape(self) -> list[str]:
+    def makeTape(self) -> NDArray[np.str_]:
         tape: list[str] = []
         current: RightHandTree | None = self
         while current is not None and current.data is not None:
@@ -48,4 +51,4 @@ class RightHandTree:
                 current = current.right
             else:
                 break
-        return tape
+        return np.array(tape)

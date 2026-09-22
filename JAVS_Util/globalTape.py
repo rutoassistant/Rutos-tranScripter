@@ -17,9 +17,9 @@ class JAVGlobalTape:
         tokenize_input: NDArray[np.str_],
         env: Any,
         show_logs: bool = False,
-    ) -> list[list[str]]:
+    ) -> list[NDArray[np.str_]]:
         string_initial_constant = "$~"
-        global_tape: list[list[str]] = []
+        global_tape: list[NDArray[np.str_]] = []
         iterate_each_word = iter(tokenize_input)
         catch_variable_value = False
         end_of_a_sentence = True
@@ -53,7 +53,7 @@ class JAVGlobalTape:
                         print("\nCustom Tree Structure of the current Sentence :- \n")
                     if show_logs and node is not None:
                         node.PrintTree()
-                    tape = node.makeTape() if node is not None else []
+                    tape = node.makeTape() if node is not None else np.array([])
                     global_tape.append(tape)
                     if show_logs:
                         print("\nEnd of a sentence", "\nTape :- \n", tape, "\n")
