@@ -3,7 +3,6 @@ from __future__ import annotations
 
 from typing import Any
 
-import numpy as np
 from numpy.typing import NDArray
 
 
@@ -11,7 +10,7 @@ class Machine:
     """Translates a list of sentence tapes into executable Python code."""
 
     @staticmethod
-    def generatePythonCode(global_tape: list[NDArray[np.str_]], env: Any) -> list[str]:
+    def generatePythonCode(global_tape: NDArray[Any], env: Any) -> list[str]:
         python_code: list[str] = []
         for sentence_tape in global_tape:
             variable_buffer: list[str] = []

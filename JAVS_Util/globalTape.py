@@ -17,7 +17,7 @@ class JAVGlobalTape:
         tokenize_input: NDArray[np.str_],
         env: Any,
         show_logs: bool = False,
-    ) -> list[NDArray[np.str_]]:
+    ) -> NDArray[Any]:
         string_initial_constant = "$~"
         global_tape: list[NDArray[np.str_]] = []
         iterate_each_word = iter(tokenize_input)
@@ -76,4 +76,4 @@ class JAVGlobalTape:
             if show_logs:
                 print("\nEnd of All the lines\n")
                 print("\nGlobal Tape:-\n", global_tape)
-        return global_tape
+        return np.array(global_tape, dtype=object)
