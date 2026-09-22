@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import os
 import sys
-from typing import Optional
 
 from Env.arithmeticEnv import ArithmeticEnv
 from JAVS_Util.exceptions import JAVSError
@@ -40,8 +39,8 @@ def main(
         print("Python Error :- ", e)
 
 
-def _parse_args(arguments: list[str]) -> tuple[Optional[str], bool, bool, bool]:
-    file_path: Optional[str] = None
+def _parse_args(arguments: list[str]) -> tuple[str | None, bool, bool, bool]:
+    file_path: str | None = None
     generate_py_code = False
     show_logs = False
     show_env_word = False

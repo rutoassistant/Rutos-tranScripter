@@ -1,7 +1,7 @@
 """Global tape construction from tokenized input using numpy arrays."""
 from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Any
 
 import numpy as np
 from numpy.typing import NDArray
@@ -23,7 +23,7 @@ class JAVGlobalTape:
         iterate_each_word = iter(tokenize_input)
         catch_variable_value = False
         end_of_a_sentence = True
-        node: Optional[RightHandTree] = None
+        node: RightHandTree | None = None
         catch_string_variable = False
         string_variable = f"{string_initial_constant}"
         try:

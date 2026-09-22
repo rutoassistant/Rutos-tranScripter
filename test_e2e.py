@@ -4,7 +4,11 @@ Usage:
     python test_e2e.py            # runs all *.ai files in this directory
     python test_e2e.py file.ai   # runs a single file
 """
-import sys, os, subprocess, glob, traceback
+import glob
+import os
+import subprocess
+import sys
+import traceback
 
 REPO = os.path.dirname(os.path.abspath(__file__))
 # Prefer uv-managed environment, fall back to system python

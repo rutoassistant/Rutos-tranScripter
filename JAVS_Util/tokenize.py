@@ -17,7 +17,7 @@ class Tokenize:
             nltk.data.find("tokenizers/punkt")
         except Exception:
             if not nltk.download("punkt", quiet=True):
-                raise NLTKError()
+                raise NLTKError() from None
 
     @staticmethod
     def make(input_string: str) -> NDArray[np.str_]:

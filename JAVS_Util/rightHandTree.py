@@ -1,8 +1,6 @@
 """Right-hand binary tree for parsing natural language expressions."""
 from __future__ import annotations
 
-from typing import Optional
-
 
 class RightHandTree:
     """Binary tree node used to build a tape from tokenized input.
@@ -13,9 +11,9 @@ class RightHandTree:
     """
 
     def __init__(self) -> None:
-        self.left: Optional[RightHandTree] = None
-        self.right: Optional[RightHandTree] = None
-        self.data: Optional[str] = None
+        self.left: RightHandTree | None = None
+        self.right: RightHandTree | None = None
+        self.data: str | None = None
 
     def insertNode(self, value: str) -> None:
         if self.data is None:
@@ -41,7 +39,7 @@ class RightHandTree:
 
     def makeTape(self) -> list[str]:
         tape: list[str] = []
-        current: Optional[RightHandTree] = self
+        current: RightHandTree | None = self
         while current is not None and current.data is not None:
             tape.append(current.data)
             if current.left is not None:

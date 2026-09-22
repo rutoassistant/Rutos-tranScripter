@@ -1,8 +1,8 @@
 """Tests for ArithmeticEnv operations in Ruto's tranScripter."""
 from __future__ import annotations
 
-import sys
 import os
+import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 from Env.arithmeticEnv import ArithmeticEnv as AE
@@ -98,7 +98,7 @@ def test_arg_count_validation() -> None:
     ]:
         try:
             fn("1")
-            assert False, f"{fn.__name__} should reject 1 arg"
+            raise AssertionError(f"{fn.__name__} should reject 1 arg")
         except Exception:
             pass
 

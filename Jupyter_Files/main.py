@@ -26,7 +26,6 @@
 import nltk
 import numpy as np
 
-
 # %%
 #importing data for nltk
 nltk.download('punkt')
@@ -45,7 +44,7 @@ print("\nInput String :-\n",inputStr)
 
 
 # %%
-#making Tokens of input 
+#making Tokens of input
 tokenizeInput=np.array(nltk.word_tokenize(inputStr))
 print("\nTokenzied Input :- \n",tokenizeInput,"\n")
 
@@ -53,12 +52,12 @@ print("\nTokenzied Input :- \n",tokenizeInput,"\n")
 # %%
 # CustomTree and MakeTape
 
-class CustomTree():
+class CustomTree:
     def __init__(self):
         self.left=None
         self.right=None
         self.data=None
-    
+
     def insertNode(self,value):
         if self.data is None:
             self.data=value
