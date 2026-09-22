@@ -27,6 +27,7 @@ class JAVGlobalTape:
         show_logs: bool = False,
     ) -> np.ndarray:
         string_initial_constant = "$~"
+        _env_vars_set: set[str] = {str(v) for v in env.env_Variables}
         global_tape: list[NDArray[np.str_]] = []
         iterate_each_word = iter(tokenize_input)
         catch_variable_value = False
@@ -37,7 +38,7 @@ class JAVGlobalTape:
         try:
             while True:
                 current_word = next(iterate_each_word)
-                if "$" == current_word and not catch_variable_value and not catch_string_variable:
+                if current_word == "$" and not catch_variable_value and not catch_string_variable:
                     catch_variable_value = True
                 elif "'" in current_word:
                     if current_word == "'":
@@ -55,7 +56,7 @@ class JAVGlobalTape:
                         string_variable = f"{string_variable}{current_word}"
                     else:
                         string_variable = f"{string_variable} {current_word}"
-                elif "." == current_word and not end_of_a_sentence:
+                elif current_word == "." and not end_of_a_sentence:
                     end_of_a_sentence = True
                     if show_logs:
                         print("\nCustom Tree Structure of the current Sentence :- \n")
@@ -74,9 +75,7 @@ class JAVGlobalTape:
                     if catch_variable_value:
                         catch_variable_value = False
                         current_word = "$" + current_word
-                    elif str(current_word).isnumeric():
-                        current_word = "$" + current_word
-                    elif current_word in env.env_Variables:
+                    elif str(current_word).isnumeric() or current_word in _env_vars_set:
                         current_word = "$" + current_word
                     if node is not None:
                         node.insertNode(current_word)

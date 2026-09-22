@@ -24,7 +24,7 @@ class ArithmeticEnv(_EnvBase):
     @staticmethod
     def addFun(*args: str) -> str:
         parts = [ArithmeticEnv._strip_var(x) for x in args]
-        return f"result =int({' + '.join(parts)})"
+        return f"result = int({' + '.join(parts)})"
 
     @staticmethod
     def multiplyFun(*args: str) -> str:
@@ -44,7 +44,7 @@ class ArithmeticEnv(_EnvBase):
     @staticmethod
     def powerFun(*args: str) -> str:
         if len(args) != 2:
-            raise Exception("power requires exactly two arguments")
+            raise ValueError("power requires exactly two arguments")
         a = ArithmeticEnv._strip_var(args[1])
         b = ArithmeticEnv._strip_var(args[0])
         return f"result = {a} ** {b}"
@@ -52,7 +52,7 @@ class ArithmeticEnv(_EnvBase):
     @staticmethod
     def moduloFun(*args: str) -> str:
         if len(args) != 2:
-            raise Exception("modulo requires exactly two arguments")
+            raise ValueError("modulo requires exactly two arguments")
         a = ArithmeticEnv._strip_var(args[1])
         b = ArithmeticEnv._strip_var(args[0])
         return f"result = {a} % {b}"
@@ -60,7 +60,7 @@ class ArithmeticEnv(_EnvBase):
     @staticmethod
     def ltFun(*args: str) -> str:
         if len(args) != 2:
-            raise Exception("lt requires exactly two arguments")
+            raise ValueError("lt requires exactly two arguments")
         a = ArithmeticEnv._strip_var(args[0])
         b = ArithmeticEnv._strip_var(args[1])
         return f"result = {a} < {b}"
@@ -68,7 +68,7 @@ class ArithmeticEnv(_EnvBase):
     @staticmethod
     def gtFun(*args: str) -> str:
         if len(args) != 2:
-            raise Exception("gt requires exactly two arguments")
+            raise ValueError("gt requires exactly two arguments")
         a = ArithmeticEnv._strip_var(args[0])
         b = ArithmeticEnv._strip_var(args[1])
         return f"result = {a} > {b}"
@@ -76,7 +76,7 @@ class ArithmeticEnv(_EnvBase):
     @staticmethod
     def eqFun(*args: str) -> str:
         if len(args) != 2:
-            raise Exception("eq requires exactly two arguments")
+            raise ValueError("eq requires exactly two arguments")
         a = ArithmeticEnv._strip_var(args[0])
         b = ArithmeticEnv._strip_var(args[1])
         return f"result = {a} == {b}"
@@ -84,7 +84,7 @@ class ArithmeticEnv(_EnvBase):
     @staticmethod
     def neFun(*args: str) -> str:
         if len(args) != 2:
-            raise Exception("ne requires exactly two arguments")
+            raise ValueError("ne requires exactly two arguments")
         a = ArithmeticEnv._strip_var(args[0])
         b = ArithmeticEnv._strip_var(args[1])
         return f"result = {a} != {b}"
@@ -92,7 +92,7 @@ class ArithmeticEnv(_EnvBase):
     @staticmethod
     def leFun(*args: str) -> str:
         if len(args) != 2:
-            raise Exception("le requires exactly two arguments")
+            raise ValueError("le requires exactly two arguments")
         a = ArithmeticEnv._strip_var(args[0])
         b = ArithmeticEnv._strip_var(args[1])
         return f"result = {a} <= {b}"
@@ -100,7 +100,7 @@ class ArithmeticEnv(_EnvBase):
     @staticmethod
     def geFun(*args: str) -> str:
         if len(args) != 2:
-            raise Exception("ge requires exactly two arguments")
+            raise ValueError("ge requires exactly two arguments")
         a = ArithmeticEnv._strip_var(args[0])
         b = ArithmeticEnv._strip_var(args[1])
         return f"result = {a} >= {b}"
@@ -108,14 +108,14 @@ class ArithmeticEnv(_EnvBase):
     @staticmethod
     def incrementFun(*args: str) -> str:
         if len(args) != 1:
-            raise Exception("increment requires exactly one argument")
+            raise ValueError("increment requires exactly one argument")
         a = ArithmeticEnv._strip_var(args[0])
         return f"result = {a} + 1"
 
     @staticmethod
     def decrementFun(*args: str) -> str:
         if len(args) != 1:
-            raise Exception("decrement requires exactly one argument")
+            raise ValueError("decrement requires exactly one argument")
         a = ArithmeticEnv._strip_var(args[0])
         return f"result = {a} - 1"
 
@@ -124,14 +124,14 @@ class ArithmeticEnv(_EnvBase):
         list_to_print: list[str] = []
         for value in reversed(args):
             if "$" in value:
-                if "~" == value[1:2]:
+                if value[1:2] == "~":
                     list_to_print.append(f'"{value[2:]}"')
                 else:
                     list_to_print.append(value[1:])
         if len(list_to_print) == 2:
             return f"{list_to_print[1]}={list_to_print[0]}"
         else:
-            raise Exception("Only One variable and one Integer is support")
+            raise ValueError("Only One variable and one Integer is support")
 
     @staticmethod
     def theFun(*args: str) -> None:
@@ -178,7 +178,7 @@ class ArithmeticEnv(_EnvBase):
         list_to_print: list[str] = []
         for value in reversed(args):
             if "$" in value:
-                if "~" == value[1:2]:
+                if value[1:2] == "~":
                     list_to_print.append(f'"{value[2:]}"')
                 else:
                     list_to_print.append(value[1:])

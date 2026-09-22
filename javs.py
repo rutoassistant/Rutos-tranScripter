@@ -45,7 +45,7 @@ def _parse_args(arguments: list[str]) -> tuple[str | None, bool, bool, bool]:
     show_logs = False
     show_env_word = False
     for argument in arguments:
-        if "-" == argument[0]:
+        if argument[0] == "-":
             if "p" in argument:
                 generate_py_code = True
             if "l" in argument:

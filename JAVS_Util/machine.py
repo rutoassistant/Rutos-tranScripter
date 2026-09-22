@@ -25,7 +25,7 @@ class Machine:
                     if result is not None:
                         python_code_sentence = [result, *python_code_sentence]
                         variable_buffer = []
-            python_code = [*python_code, *python_code_sentence]
+            python_code.extend(python_code_sentence)
         return python_code
 
     @staticmethod

@@ -9,8 +9,8 @@ from Env.arithmeticEnv import ArithmeticEnv as AE
 
 
 def test_add() -> None:
-    assert AE.addFun("3", "5") == "result =int(3 + 5)"
-    assert AE.addFun("$v1", "3") == "result =int(v1 + 3)"
+    assert AE.addFun("3", "5") == "result = int(3 + 5)"
+    assert AE.addFun("$v1", "3") == "result = int(v1 + 3)"
 
 
 def test_subtract() -> None:

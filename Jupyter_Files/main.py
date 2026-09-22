@@ -175,9 +175,9 @@ node=None
 try:
     while True:
         current_Word=next(itreate_each_word)
-        if "$"== current_Word and not catch_variable_value:
+        if current_Word == "$" and not catch_variable_value:
             catch_variable_value=True
-        elif "."==current_Word and not end_Of_a_Sentence:
+        elif current_Word == "." and not end_Of_a_Sentence:
             end_Of_a_Sentence=True
             print("\nCustom Tree Stracture of the current Sentence :- \n")
             node.PrintTree()
@@ -192,9 +192,7 @@ try:
             elif catch_variable_value:
                 catch_variable_value=False
                 current_Word="$"+current_Word
-            elif str(current_Word).isnumeric():
-                current_Word="$"+current_Word
-            elif current_Word in ArithameticEnv.env_Variables:
+            elif str(current_Word).isnumeric() or current_Word in ArithameticEnv.env_Variables:
                 current_Word="$"+current_Word
             node.insertNode(current_Word)
             # print(current_Word)
