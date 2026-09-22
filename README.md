@@ -13,9 +13,9 @@ To Test the Project :-
 
 \* Go to the extracted folder.
 
-\* Open a shell and install all python requirements (For linux users use pip3 instead of pip)
+\* Open a shell and install all python requirements using uv:
 ```
-pip install requirements.txt
+uv pip install -r requirements.txt
 ```
 
 ---

@@ -7,6 +7,7 @@ Usage:
 import sys, os, subprocess, glob, traceback
 
 REPO = os.path.dirname(os.path.abspath(__file__))
+# Prefer uv-managed environment, fall back to system python
 VENV_PY = os.path.join(REPO, '..', 'javs-venv', 'bin', 'python')
 if not os.path.exists(VENV_PY):
     VENV_PY = sys.executable  # fallback to current interpreter
