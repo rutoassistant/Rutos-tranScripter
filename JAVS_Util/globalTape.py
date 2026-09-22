@@ -1,12 +1,20 @@
 """Global tape construction from tokenized input using numpy arrays."""
 from __future__ import annotations
 
-from typing import Any
+from collections.abc import Callable
+from typing import ClassVar
 
 import numpy as np
 from numpy.typing import NDArray
 
 from .rightHandTree import RightHandTree
+
+
+class _EnvBase:
+    """Base class for arithmetic environments."""
+
+    env_Variables: ClassVar[NDArray[np.str_]]
+    env_Words_and_WordAsFunction: ClassVar[dict[str, Callable[..., str | None]]]
 
 
 class JAVGlobalTape:
@@ -15,7 +23,7 @@ class JAVGlobalTape:
     @staticmethod
     def make(
         tokenize_input: NDArray[np.str_],
-        env: Any,
+        env: _EnvBase,
         show_logs: bool = False,
     ) -> np.ndarray:
         string_initial_constant = "$~"

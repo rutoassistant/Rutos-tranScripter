@@ -2,16 +2,18 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-from typing import Any
+from typing import ClassVar
 
 import numpy as np
 from numpy.typing import NDArray
 
+from JAVS_Util.globalTape import _EnvBase
 
-class ArithmeticEnv:
+
+class ArithmeticEnv(_EnvBase):
     """Environment that maps natural language words to Python code generators."""
 
-    env_Variables: NDArray[np.str_] = np.array(["result"])
+    env_Variables: ClassVar[NDArray[np.str_]] = np.array(["result"])
     name_of_Env: str = "ArithmeticEnv"
 
     @staticmethod
@@ -186,7 +188,7 @@ class ArithmeticEnv:
     def displayFun(*args: str) -> str:
         return ArithmeticEnv.printFun(*args)
 
-    env_Words_and_WordAsFunction: dict[str, Callable[..., Any]] = {
+    env_Words_and_WordAsFunction: ClassVar[dict[str, Callable[..., str | None]]] = {
         "add": addFun,
         "and": andFun,
         ",": commaFun,

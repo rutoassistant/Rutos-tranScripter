@@ -1,16 +1,16 @@
 """Machine: generates and executes Python code from the global tape."""
 from __future__ import annotations
 
-from typing import Any
-
 import numpy as np
+
+from JAVS_Util.globalTape import _EnvBase
 
 
 class Machine:
     """Translates a list of sentence tapes into executable Python code."""
 
     @staticmethod
-    def generatePythonCode(global_tape: np.ndarray, env: Any) -> list[str]:
+    def generatePythonCode(global_tape: np.ndarray, env: _EnvBase) -> list[str]:
         python_code: list[str] = []
         for sentence_tape in global_tape:
             variable_buffer: list[str] = []
