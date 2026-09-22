@@ -17,7 +17,7 @@ class JAVGlobalTape:
         tokenize_input: NDArray[np.str_],
         env: Any,
         show_logs: bool = False,
-    ) -> NDArray[Any]:
+    ) -> np.ndarray:
         string_initial_constant = "$~"
         global_tape: list[NDArray[np.str_]] = []
         iterate_each_word = iter(tokenize_input)
