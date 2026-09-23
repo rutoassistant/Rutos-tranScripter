@@ -108,24 +108,9 @@ Helper `_split_block(block_tape)` separates condition portion (before body keywo
 
 Helper `_generate_code_segment(tape_segment, env, indent_level)` is the **existing** reverse-walk logic, extracted into a standalone method for reuse on condition/body sub-tapes.
 
-### Tape Format
+### RightHandTree: No Changes
 
-The tape remains `NDArray[object]` (mixed types). Simple tokens stay as strings. Block references use tuple markers:
-
-```python
-# Simple statement
-tape = np.array(["add", "3", "with", "5"], dtype=object)
-
-# With control flow (block markers)
-tape = np.array([
-    "if",
-    "x", "is", "greater", "than", "5",   # condition segment
-    "store", "10", "in", "$v1",          # body segment
-    "end_if",
-], dtype=object)
-```
-
-The machine's forward scan identifies block boundaries and splits segments automatically — the user doesn't need to manually format the tape.
+`RightHandTree` and `globalTape.py` remain unchanged. The tree still does a simple left-root-right traversal → flat `NDArray[str]`. Control flow structure emerges at the **machine level** when the forward scanner detects block keywords in the tape.
 
 ### Supported English Sentence Patterns
 
@@ -154,6 +139,8 @@ All patterns use the `.ai` file format (one sentence per line, ending with `.`).
 | `test_arithmetic_env.py` | Add control flow unit tests |
 | `test_e2e.py` | Add e2e test cases |
 | `README.md` | Document new syntax |
+| `JAVS_Util/rightHandTree.py` | **no change** — tree stays flat, control flow is machine-level |
+| `JAVS_Util/globalTape.py` | **no change** — tape format unchanged |
 
 ### Testing Strategy
 
