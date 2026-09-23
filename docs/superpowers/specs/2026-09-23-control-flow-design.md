@@ -18,16 +18,17 @@ Control flow requires hierarchical structure (condition + body), but the tape is
 
 ### New Environment: `ControlFlowEnv`
 
+`ControlFlowEnv` **extends** `ArithmeticEnv` — it inherits all arithmetic words (`add`, `store`, `print`, `gt`, `lt`, etc.) automatically. Only control-flow-specific entries are declared here.
+
 ```python
 class ControlFlowEnv(ArithmeticEnv):
-    """Control flow environment — extends ArithmeticEnv with if/for/while."""
+    """Control flow environment — inherits arithmetic, adds if/for/while."""
     
     name_of_Env: str = "ControlFlowEnv"
     
-    # Condition helpers (also used by arithmetic)
+    # Merge: start with parent's dict, overlay control flow entries
     env_Words_and_WordAsFunction: ClassVar[dict[str, Callable[..., str | None]]] = {
-        # --- condition words (inherited from ArithmeticEnv) ---
-        # eq, ne, gt, lt, ge, le already defined in ArithmeticEnv
+        **ArithmeticEnv.env_Words_and_WordAsFunction,  # inherits add, store, print, gt, lt, eq...
         
         # --- block markers ---
         "if": ifFun,
@@ -45,7 +46,7 @@ class ControlFlowEnv(ArithmeticEnv):
         # --- iteration loops ---
         "for": forFun,
         "each": eachFun,
-        "in": inFun,  # override: ControlFlowEnv uses 'in' for loop context
+        "in": inFun,  # override ArithmeticEnv.inFun (no-op → returns None, fine for loop context)
         "end_for": endForFun,
         "endfor": endForFun,
         
@@ -57,10 +58,12 @@ class ControlFlowEnv(ArithmeticEnv):
         
         # --- boolean operators ---
         "not": notFun,
-        "and": andFun,   # override: ControlFlowEnv uses 'and' for conditions
+        "and": andFun,   # override ArithmeticEnv.andFun (no-op → returns None)
         "or": orFun,
     }
 ```
+
+Since `ControlFlowEnv` inherits from `ArithmeticEnv`, all arithmetic words (`add`, `subtract`, `multiply`, `divide`, `store`, `print`, `display`, `the`, `with`, `by`, `from`, `to`, `increment`, `decrement`, `power`, `modulo`, `gt`, `lt`, `eq`, `ne`, `ge`, `le`) are available without re-declaration.
 
 #### Function Signatures
 
